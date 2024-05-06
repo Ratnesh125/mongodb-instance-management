@@ -14,7 +14,7 @@ export const fetchData = async (setGlobalState) => {
         }
         console.log(storedUri);
 
-        const response = await axios.post('http://localhost:3000/instance', {
+        const response = await axios.post('https://kind-blue-piglet-boot.cyclic.app/instance', {
             uri: storedUri,  
         });
         console.log(response);

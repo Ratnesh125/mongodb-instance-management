@@ -22,7 +22,7 @@ const AdminControls = () => {
         e.preventDefault();
         setIsCreating(true);
         try {
-            const response = await axios.post('http://localhost:3000/create-database', {
+            const response = await axios.post('https://kind-blue-piglet-boot.cyclic.app/create-database', {
                 uri: storedUri,
                 databaseName: createDatabaseName,
                 collectionName: createCollectionName
@@ -49,7 +49,7 @@ const AdminControls = () => {
     const handleAddEntry = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/add-entry', {
+            const response = await axios.post('https://kind-blue-piglet-boot.cyclic.app/add-entry', {
                 uri: storedUri,
                 databaseName: addEntryDatabaseName,
                 collectionName: addEntryCollectionName,
@@ -75,7 +75,7 @@ const AdminControls = () => {
         e.preventDefault();
         setIsDeleting(true);
         try {
-            const response = await axios.delete('http://localhost:3000/delete-database', {
+            const response = await axios.delete('https://kind-blue-piglet-boot.cyclic.app/delete-database', {
                 data: { databaseName: deleteDatabaseName, uri: storedUri }
             });
 
