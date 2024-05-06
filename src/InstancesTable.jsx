@@ -57,7 +57,7 @@ const InstancesTable = () => {
                                             <ul className="list-disc list-inside">
                                                 {database.collections.map((collection) => (
                                                     <li key={collection.name}>
-                                                        {collection.name} (Entries: {collection.entryCount || 0})
+                                                        {collection} 
                                                     </li>
                                                 ))}
                                             </ul>
