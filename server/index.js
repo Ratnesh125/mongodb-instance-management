@@ -9,8 +9,6 @@ app.use(express.json());
 
 app.post('/instance', async (req, res) => {
     const uri = req.body.uri || ""
-    console.log(uri);
-
     const client = new MongoClient(uri);
 
     try {
@@ -104,10 +102,16 @@ app.post('/add-entry', async (req, res) => {
     }
 });
 
+const protectedDatabases = ['admin_panel', 'courses', 'hackathondb', 'leetforces', 'portfolio', 'admin', 'local', 'test'];
+
 app.delete('/delete-database', async (req, res) => {
-    const databaseName = req.body.databaseName;
-    const uri = req.body.uri || ""
-    const client = new MongoClient(uri);
+    const { databaseName, uri } = req.body;
+    // Check if the database name is in the protected list
+    if (protectedDatabases.includes(databaseName)) {
+        res.status(403).json({ error: 'Cannot delete protected database' });
+        return;
+    }
+     const client = new MongoClient(uri);
 
     try {
         await client.connect();
@@ -123,5 +127,5 @@ app.delete('/delete-database', async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server is running on PORT:${port}`);
 });
