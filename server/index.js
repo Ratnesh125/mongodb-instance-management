@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/instance', async (req, res) => {
-    const uri = req.body.uri
+    const uri = req.body.uri || ""
     console.log(uri);
 
     const client = new MongoClient(uri);
@@ -62,7 +62,8 @@ app.get('/instance/:database', async (req, res) => {
 
 //  create a new db
 app.post('/create-database', async (req, res) => {
-    const { databaseName, collectionName,uri } = req.body;
+    const { databaseName, collectionName } = req.body;
+    const uri = req.body.uri || ""
     const client = new MongoClient(uri);
 
     if (!databaseName || !collectionName) {
@@ -85,7 +86,8 @@ app.post('/create-database', async (req, res) => {
 });
 
 app.post('/add-entry', async (req, res) => {
-    const { databaseName, collectionName, entry, uri } = req.body;
+    const { databaseName, collectionName, entry } = req.body;
+    const uri = req.body.uri || ""
     const client = new MongoClient(uri);
 
     try {
@@ -103,7 +105,8 @@ app.post('/add-entry', async (req, res) => {
 });
 
 app.delete('/delete-database', async (req, res) => {
-    const { databaseName, uri } = req.body;
+    const databaseName = req.body.databaseName;
+    const uri = req.body.uri || ""
     const client = new MongoClient(uri);
 
     try {
