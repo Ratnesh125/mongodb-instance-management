@@ -39,7 +39,7 @@ const URILinkInput = () => {
                     required
                     className="w-full p-2 border border-gray-300 rounded"
                 />
-                <h2 className="text-xl font-semibold mb-4">Connected with {maskedUri}</h2>
+                <h2 className="text-xl text-red-500 font-semibold mb-4">Test uri: mongodb+srv://test1:test@cluster0.2mxjqot.mongodb.net </h2>
 
                 <button
                     type="submit"
@@ -47,6 +47,9 @@ const URILinkInput = () => {
                 >
                     Connect to MongoDB
                 </button>
+
+                <h2 className="text-xl font-semibold mb-4">Connected with {maskedUri}</h2>
+
             </form>
              <p className="text-gray-600">URI link will be stored in local storage.</p>
         </div>
