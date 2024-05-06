@@ -7,7 +7,19 @@ export const useGlobalState = () => useContext(GlobalContext);
 
 export const fetchData = async (setGlobalState) => {
     try {
-        const response = await axios.get('http://localhost:3000/instance');
+        const storedUri = localStorage.getItem('storedURI');
+        if (!storedUri) {
+            console.error('No URI found in local storage');
+            return;
+        }
+        console.log(storedUri);
+
+        const response = await axios.post('http://localhost:3000/instance', {
+            uri: storedUri,  
+        });
+        console.log(response);
+
+
         setGlobalState(response.data.databases);
     } catch (error) {
         console.error('Error fetching data:', error);

@@ -15,12 +15,15 @@ const AdminControls = () => {
     const [message, setMessage] = useState('');
     const [isCreating, setIsCreating] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+    const storedUri = localStorage.getItem('storedURI');
+
 
     const handleCreateDatabase = async (e) => {
         e.preventDefault();
         setIsCreating(true);
         try {
             const response = await axios.post('http://localhost:3000/create-database', {
+                uri: storedUri,
                 databaseName: createDatabaseName,
                 collectionName: createCollectionName
             });
@@ -47,6 +50,7 @@ const AdminControls = () => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:3000/add-entry', {
+                uri: storedUri,
                 databaseName: addEntryDatabaseName,
                 collectionName: addEntryCollectionName,
                 entry: JSON.parse(addEntryData)
@@ -72,8 +76,9 @@ const AdminControls = () => {
         setIsDeleting(true);
         try {
             const response = await axios.delete('http://localhost:3000/delete-database', {
-                data: { databaseName: deleteDatabaseName }
+                data: { databaseName: deleteDatabaseName, uri: storedUri }
             });
+
 
             if (response.data.success || response.status === 200) {
                 await fetchData(setGlobalState);
