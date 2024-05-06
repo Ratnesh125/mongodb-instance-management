@@ -7,8 +7,6 @@ const URILinkInput = () => {
     const [globalState, setGlobalState] = useGlobalState();
     const storedUri = localStorage.getItem('storedURI');
     const maskedUri = maskMongoDBUri(storedUri);
-
-    localStorage.setItem('storedURI', '');
     
     const handleInputChange = (e) => {
         setUri(e.target.value);
