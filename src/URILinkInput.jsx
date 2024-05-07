@@ -6,15 +6,17 @@ const URILinkInput = () => {
     const [uri, setUri] = useState('');
     const [globalState, setGlobalState] = useGlobalState();
     const storedUri = localStorage.getItem('storedURI');
-    const maskedUri = maskMongoDBUri(storedUri);
+    const maskedUri = maskMongoDBUri(storedUri) ||"  ";
     
     const handleInputChange = (e) => {
         setUri(e.target.value);
     };
     function maskMongoDBUri(uri) {
-         const pattern = /\/\/(.*?):(.*?)@/;
-        const maskedUri = uri.replace(pattern, '//***:***@');
-        return maskedUri;
+        if(uri != null){
+            const pattern = /\/\/(.*?):(.*?)@/;
+            const maskedUri = uri.replace(pattern, '//***:***@');
+            return maskedUri;
+        }
     }
 
     // Handle form submission
