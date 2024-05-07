@@ -10,7 +10,7 @@ const URILinkInput = () => {
 
     useEffect(() => {
         if (storedUri === null) {
-            setUri("h");
+            setUri(" ");
         }
     }, [storedUri]);
     
