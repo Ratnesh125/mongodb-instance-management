@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGlobalState, fetchData } from './InstanceContext';
 
 const URILinkInput = () => {
@@ -7,6 +7,12 @@ const URILinkInput = () => {
     const [globalState, setGlobalState] = useGlobalState();
     const storedUri = localStorage.getItem('storedURI');
     const maskedUri = maskMongoDBUri(storedUri) ||"  ";
+
+    useEffect(() => {
+        if (storedUri === null) {
+            setUri("h");
+        }
+    }, [storedUri]);
     
     const handleInputChange = (e) => {
         setUri(e.target.value);
